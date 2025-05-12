@@ -15,7 +15,7 @@ A 3D spinning lantern for Vesak celebrations.
 
 ## How to Use
 
-1. Visit the GitHub Pages site: [rumeshchathuranga.github.io/vesak-lantern]([https://yourusername.github.io/vesak-lantern](https://rumeshchathuranga.github.io/Vesak_Lantran/))
+1. Visit the GitHub Pages site: [rumeshchathuranga.github.io/vesak-lantern](https://rumeshchathuranga.github.io/Vesak_Lantran/)
 2. Click "Start Vesak Experience" to begin the music
 3. Use the buttons at the top to change colors and rotation speed
 4. Enjoy the peaceful Vesak celebration!
