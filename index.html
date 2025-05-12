@@ -189,6 +189,24 @@
     .hidden {
       display: none;
     }
+    
+    /* Footer styles */
+    .footer {
+      position: fixed;
+      bottom: 5px;
+      width: 100%;
+      text-align: center;
+      color: rgba(255, 255, 255, 0.7);
+      font-family: 'Arial', sans-serif;
+      font-size: 14px;
+      z-index: 10;
+    }
+    
+    .creator-name {
+      font-weight: bold;
+      color: #ff8c00;
+      text-shadow: 0 0 5px rgba(255, 140, 0, 0.5);
+    }
   </style>
 </head>
 <body>
@@ -234,10 +252,14 @@
   <audio id="bgMusic" loop autoplay muted>
     <!-- Replace "your-music.mp3" with your music file name -->
     <source src="audio.mp3" type="audio/mpeg">
-
   </audio>
   
   <h1>පින්බර වෙසක් පොහෝ දිනයක් වේවා!</h1>
+  
+  <!-- Footer with creator name -->
+  <div class="footer">
+    Made by <span class="creator-name">Rumesh Chathuranga</span>
+  </div>
   
   <script>
     const colors = [
