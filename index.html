@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Spinning Vesak Lantern</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: #000;
+      background-image: radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 40px),
+                        radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 30px),
+                        radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 40px);
+      background-size: 550px 550px, 350px 350px, 250px 250px;
+      background-position: 0 0, 40px 60px, 130px 270px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+      flex-direction: column;
+    }
+    
+    .scene {
+      width: 200px;
+      height: 200px;
+      perspective: 800px;
+      margin-bottom: 50px;
+    }
+    
+    .lantern {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+      animation: spin 10s linear infinite;
+    }
+    
+    .face {
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      background: linear-gradient(45deg, #ffd700, #ff6347);
+      border: 5px solid white;
+      box-shadow: 0 0 30px rgba(255, 255, 100, 0.7);
+      opacity: 0.95;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+    
+    .buddha-image {
+      width: 120px;
+      height: 120px;
+      object-fit: contain;
+      z-index: 3;
+    }
+    
+    .face:nth-child(1) { transform: rotateY(0deg) translateZ(100px); }
+    .face:nth-child(2) { transform: rotateY(90deg) translateZ(100px); }
+    .face:nth-child(3) { transform: rotateY(180deg) translateZ(100px); }
+    .face:nth-child(4) { transform: rotateY(-90deg) translateZ(100px); }
+    
+    .top, .bottom {
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      background: linear-gradient(45deg, #ff1493, #ff4500);
+      opacity: 0.9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+    
+    .top {
+      transform: rotateX(90deg) translateZ(90px);
+    }
+    
+    .bottom {
+      transform: rotateX(-90deg) translateZ(90px);
+    }
+    
+    .string {
+      position: absolute;
+      width: 2px;
+      height: 80px;
+      background-color: rgba(255, 255, 255, 0.7);
+      top: -80px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    
+    .glow {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,215,0,0.4) 0%, rgba(255,215,0,0) 70%);
+      animation: pulse 3s ease-in-out infinite alternate;
+    }
+    
+    @keyframes spin {
+      from { transform: rotateY(0deg); }
+      to { transform: rotateY(360deg); }
+    }
+    
+    @keyframes pulse {
+      0% { opacity: 0.5; transform: scale(1); }
+      100% { opacity: 1; transform: scale(1.2); }
+    }
+    
+    h1 {
+      position: absolute;
+      bottom: 30px;
+      width: 100%;
+      text-align: center;
+      color: #ff6600;
+      font-family: 'Arial', sans-serif;
+      font-size: 32px;
+      font-weight: bold;
+      text-shadow: 0 0 10px rgba(255, 102, 0, 0.7);
+      z-index: 10;
+    }
+    
+    .title {
+      position: absolute;
+      top: 30px;
+      width: 100%;
+      text-align: center;
+      color: #ff6600;
+      font-family: 'Arial', sans-serif;
+      font-size: 40px;
+      font-weight: bold;
+      text-shadow: 0 0 15px rgba(255, 102, 0, 0.7);
+      z-index: 10;
+    }
+    
+    .controls {
+      position: absolute;
+      top: 100px;
+      display: flex;
+      gap: 10px;
+      z-index: 10;
+    }
+    
+    button {
+      background: linear-gradient(45deg, #ff8c00, #ff4500);
+      border: none;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: bold;
+      box-shadow: 0 0 10px rgba(255, 165, 0, 0.5);
+    }
+    
+    button:hover {
+      box-shadow: 0 0 15px rgba(255, 165, 0, 0.8);
+    }
+    
+    /* Start button for mobile devices */
+    .start-experience {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 100;
+      cursor: pointer;
+    }
+    
+    .start-button {
+      padding: 15px 30px;
+      font-size: 24px;
+      background: linear-gradient(45deg, #ff8c00, #ff4500);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 0 20px rgba(255, 165, 0, 0.7);
+    }
+    
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <!-- Overlay to start experience on mobile devices -->
+  <div class="start-experience" id="startOverlay">
+    <button class="start-button">🎵 Start Vesak Experience 🎵</button>
+  </div>
+
+  <div class="title">HAPPY VESAK DAY</div>
+  
+  <div class="controls">
+    <button onclick="changeColor()">Change Color</button>
+    <button onclick="changeSpeed()">Change Speed</button>
+    <button onclick="toggleMusic()" id="musicToggleBtn">Mute Music</button>
+  </div>
+  
+  <div class="scene">
+    <div class="string"></div>
+    <div class="lantern" id="lantern">
+      <div class="face">
+        <img class="buddha-image" src="vesk.jpg" alt="Buddha silhouette">
+      </div>
+      <div class="face">
+        <img class="buddha-image" src="vesk.jpg" alt="Buddha silhouette">
+      </div>
+      <div class="face">
+        <img class="buddha-image" src="vesk.jpg" alt="Buddha silhouette">
+      </div>
+      <div class="face">
+        <img class="buddha-image" src="vesk.jpg" alt="Buddha silhouette">
+      </div>
+      <div class="top">
+        <img class="buddha-image" src="vesk.jpg" alt="Buddha silhouette">
+      </div>
+      <div class="bottom">
+        <img class="buddha-image" src="vesk.jpg" alt="Buddha silhouette">
+      </div>
+    </div>
+    <div class="glow"></div>
+  </div>
+  
+  <!-- Audio element for background music -->
+  <audio id="bgMusic" loop autoplay muted>
+    <!-- Replace "your-music.mp3" with your music file name -->
+    <source src="audio.mp3" type="audio/mpeg">
+
+  </audio>
+  
+  <h1>සුබ වෙසක් දිනයක් වේවා</h1>
+  
+  <script>
+    const colors = [
+      { face: 'linear-gradient(45deg, #ffd700, #ff6347)', top: 'linear-gradient(45deg, #ff1493, #ff4500)' },
+      { face: 'linear-gradient(45deg, #00bfff, #7b68ee)', top: 'linear-gradient(45deg, #00ffff, #4169e1)' },
+      { face: 'linear-gradient(45deg, #32cd32, #ffd700)', top: 'linear-gradient(45deg, #00fa9a, #ffa500)' },
+      { face: 'linear-gradient(45deg, #ff69b4, #da70d6)', top: 'linear-gradient(45deg, #ff1493, #9370db)' }
+    ];
+    
+    const speeds = ['20s', '15s', '10s', '5s', '3s'];
+    
+    let currentColor = 0;
+    let currentSpeed = 2;
+    let musicPlaying = false;
+    
+    const audioElement = document.getElementById('bgMusic');
+    const startOverlay = document.getElementById('startOverlay');
+    const musicToggleBtn = document.getElementById('musicToggleBtn');
+    
+    function changeColor() {
+      currentColor = (currentColor + 1) % colors.length;
+      const faces = document.querySelectorAll('.face');
+      const topBottom = document.querySelectorAll('.top, .bottom');
+      
+      faces.forEach(face => {
+        face.style.background = colors[currentColor].face;
+      });
+      
+      topBottom.forEach(el => {
+        el.style.background = colors[currentColor].top;
+      });
+    }
+    
+    function changeSpeed() {
+      currentSpeed = (currentSpeed + 1) % speeds.length;
+      document.querySelector('#lantern').style.animationDuration = speeds[currentSpeed];
+    }
+    
+    function toggleMusic() {
+      if (musicPlaying) {
+        audioElement.muted = true;
+        musicToggleBtn.textContent = "Unmute Music";
+      } else {
+        audioElement.muted = false;
+        musicToggleBtn.textContent = "Mute Music";
+      }
+      musicPlaying = !musicPlaying;
+    }
+    
+    // Set default volume (without slider)
+    audioElement.volume = 0.7;
+    
+    // Start overlay handling (required for autoplay on mobile)
+    startOverlay.addEventListener('click', function() {
+      startOverlay.classList.add('hidden');
+      
+      // Start music (this will work because it's triggered by user interaction)
+      audioElement.muted = false;
+      audioElement.play().catch(e => {
+        console.error("Failed to autoplay:", e);
+      });
+      
+      musicPlaying = true;
+    });
+    
+    // Try autoplay on desktop (may work on some browsers)
+    window.addEventListener('load', function() {
+      // For desktop - try to autoplay, but browser may still block it
+      audioElement.play().then(() => {
+        audioElement.muted = false;
+        musicPlaying = true;
+        console.log("Autoplay successful");
+      }).catch(e => {
+        console.log("Autoplay prevented (normal browser behavior) - user needs to interact with the page first");
+      });
+    });
+    
+    // Alternative autoplay method - detect any user interaction with the page
+    document.addEventListener('click', function startAudioOnFirstInteraction() {
+      if (audioElement.paused) {
+        audioElement.muted = false;
+        audioElement.play().catch(console.error);
+        musicPlaying = true;
+      }
+      
+      // Only need to do this once
+      document.removeEventListener('click', startAudioOnFirstInteraction);
+    });
+  </script>
+</body>
+</html>
